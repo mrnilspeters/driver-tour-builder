@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/AnnilBerd/driver-tour-builder/releases/latest"><img src="https://img.shields.io/github/v/release/AnnilBerd/driver-tour-builder?style=flat-square&color=7c6aef" alt="Latest Release" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/AnnilBerd/driver-tour-builder?style=flat-square&color=34d399" alt="License: MIT" /></a>
+  <a href="https://github.com/mrnilspeters/driver-tour-builder/releases/latest"><img src="https://img.shields.io/github/v/release/mrnilspeters/driver-tour-builder?style=flat-square&color=7c6aef" alt="Latest Release" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/mrnilspeters/driver-tour-builder?style=flat-square&color=34d399" alt="License: MIT" /></a>
   <img src="https://img.shields.io/badge/manifest-v3-blue?style=flat-square" alt="Manifest V3" />
   <img src="https://img.shields.io/badge/chrome-extension-yellow?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome Extension" />
   <img src="https://img.shields.io/badge/i18n-DE%20%7C%20EN-lightgrey?style=flat-square" alt="Languages: DE | EN" />
@@ -58,7 +58,7 @@
 
 ### Option A: Download Release (Recommended)
 
-1. Go to the [**Releases**](https://github.com/AnnilBerd/driver-tour-builder/releases/latest) page
+1. Go to the [**Releases**](https://github.com/mrnilspeters/driver-tour-builder/releases/latest) page
 2. Download the latest `driver-tour-builder-vX.X.X.zip`
 3. Unzip it to a permanent folder on your machine
 4. Open Chrome and navigate to `chrome://extensions/`
@@ -69,7 +69,7 @@
 ### Option B: Clone from Source
 
 ```bash
-git clone https://github.com/AnnilBerd/driver-tour-builder.git
+git clone https://github.com/mrnilspeters/driver-tour-builder.git
 cd driver-tour-builder
 ```
 

@@ -6,7 +6,7 @@ Thank you for your interest in contributing! 🎉
 
 ### Reporting Bugs
 
-1. Check [existing issues](https://github.com/AnnilBerd/driver-tour-builder/issues) to avoid duplicates
+1. Check [existing issues](https://github.com/mrnilspeters/driver-tour-builder/issues) to avoid duplicates
 2. Use the **Bug Report** issue template
 3. Include:
    - Chrome version
@@ -69,7 +69,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```bash
 # Clone the repo
-git clone https://github.com/AnnilBerd/driver-tour-builder.git
+git clone https://github.com/mrnilspeters/driver-tour-builder.git
 cd driver-tour-builder
 
 # Load in Chrome
