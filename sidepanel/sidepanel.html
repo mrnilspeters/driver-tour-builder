@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <!-- ═══ Header ═══ -->
+  <header class="header" id="header">
+    <div class="header__brand">
+      <div class="header__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="header__title">Tour Builder</h1>
+        <span class="header__subtitle" data-i18n="headerSubtitle">driver.js Visueller Editor</span>
+      </div>
+    </div>
+    <div class="header__lang">
+      <select id="lang-select" class="lang-select" title="Language">
+        <option value="de">DE</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- ═══ Tour Name ═══ -->
+  <section class="section" id="tour-name-section">
+    <div class="input-group">
+      <label class="label" for="tour-name" data-i18n="tourNameLabel">Tour-Name</label>
+      <input type="text" id="tour-name" class="input" data-i18n="tourNamePlaceholder" data-i18n-target="placeholder" placeholder="Meine Produkt-Tour" value="Meine Tour" />
+    </div>
+  </section>
+
+  <!-- ═══ Action Bar ═══ -->
+  <section class="action-bar" id="action-bar">
+    <button class="btn btn--primary" id="btn-pick" data-i18n-title="pickElementTitle" title="Element auf der Seite auswählen">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+      <span data-i18n="pickElement">Element wählen</span>
+    </button>
+    <button class="btn btn--accent" id="btn-preview" data-i18n-title="previewTitle" title="Vorschau starten">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span data-i18n="preview">Vorschau</span>
+    </button>
+    <button class="btn btn--ghost" id="btn-add-step" data-i18n-title="addStepTitle" title="Leeren Step hinzufügen">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </section>
+
+  <!-- ═══ Steps List ═══ -->
+  <section class="section" id="steps-section">
+    <div class="section__header">
+      <h2 class="section__title">
+        <span data-i18n="stepsTitle">Steps</span>
+        <span class="badge" id="step-count">0</span>
+      </h2>
+    </div>
+    <div class="steps-list" id="steps-list">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-state__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+        </div>
+        <p class="empty-state__text" data-i18n="noSteps">Keine Steps vorhanden</p>
+        <p class="empty-state__hint" data-i18n="noStepsHint">Klicke auf „Element wählen" um einen Step hinzuzufügen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Global Settings (Collapsible) ═══ -->
+  <section class="section collapsible" id="global-settings-section">
+    <button class="section__header section__header--toggle" id="toggle-global-settings">
+      <h2 class="section__title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        <span data-i18n="globalSettings">Globale Einstellungen</span>
+      </h2>
+    </button>
+    <div class="section__content" id="global-settings-content" style="display:none;">
+      <div class="settings-grid">
+        <div class="setting-row">
+          <label class="label" data-i18n="animation">Animation</label>
+          <label class="toggle"><input type="checkbox" id="cfg-animate" checked /><span class="toggle__slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <label class="label" data-i18n="smoothScroll">Smooth Scroll</label>
+          <label class="toggle"><input type="checkbox" id="cfg-smooth-scroll" /><span class="toggle__slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <label class="label" data-i18n="allowClose">Schließen erlauben</label>
+          <label class="toggle"><input type="checkbox" id="cfg-allow-close" checked /><span class="toggle__slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <label class="label" data-i18n="keyboardNav">Tastatur-Navigation</label>
+          <label class="toggle"><input type="checkbox" id="cfg-keyboard" checked /><span class="toggle__slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <label class="label" data-i18n="showProgress">Fortschritt anzeigen</label>
+          <label class="toggle"><input type="checkbox" id="cfg-show-progress" /><span class="toggle__slider"></span></label>
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-overlay-opacity" data-i18n="overlayOpacity">Overlay-Deckkraft</label>
+          <input type="range" id="cfg-overlay-opacity" class="range" min="0" max="1" step="0.05" value="0.7" />
+          <span class="range-value" id="cfg-overlay-opacity-val">0.7</span>
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-overlay-color" data-i18n="overlayColor">Overlay-Farbe</label>
+          <div class="color-input">
+            <input type="color" id="cfg-overlay-color" value="#000000" />
+            <input type="text" id="cfg-overlay-color-text" class="input input--sm" value="#000000" />
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-stage-padding" data-i18n="stagePadding">Stage-Padding</label>
+          <input type="number" id="cfg-stage-padding" class="input input--sm" value="10" min="0" max="50" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-stage-radius" data-i18n="stageRadius">Stage-Radius</label>
+          <input type="number" id="cfg-stage-radius" class="input input--sm" value="5" min="0" max="50" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-popover-offset" data-i18n="popoverOffset">Popover-Offset</label>
+          <input type="number" id="cfg-popover-offset" class="input input--sm" value="10" min="0" max="50" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-next-text" data-i18n="nextBtnLabel">„Weiter"-Button</label>
+          <input type="text" id="cfg-next-text" class="input input--sm" value="Weiter" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-prev-text" data-i18n="prevBtnLabel">„Zurück"-Button</label>
+          <input type="text" id="cfg-prev-text" class="input input--sm" value="Zurück" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-done-text" data-i18n="doneBtnLabel">„Fertig"-Button</label>
+          <input type="text" id="cfg-done-text" class="input input--sm" value="Fertig" />
+        </div>
+        <div class="input-group">
+          <label class="label" for="cfg-progress-text" data-i18n="progressTemplate">Fortschritts-Template</label>
+          <input type="text" id="cfg-progress-text" class="input input--sm" value="{{current}} / {{total}}" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Export / Import ═══ -->
+  <section class="section" id="export-section">
+    <div class="section__header">
+      <h2 class="section__title" data-i18n="exportImport">Export / Import</h2>
+    </div>
+    <div class="export-buttons">
+      <button class="btn btn--secondary btn--full" id="btn-export-json">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="exportJson">JSON exportieren</span>
+      </button>
+      <button class="btn btn--secondary btn--full" id="btn-export-code">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span data-i18n="exportCode">Code exportieren</span>
+      </button>
+      <button class="btn btn--secondary btn--full" id="btn-copy-json">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span data-i18n="copyClipboard">In Zwischenablage kopieren</span>
+      </button>
+      <button class="btn btn--ghost btn--full" id="btn-import-json">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span data-i18n="importJson">JSON importieren</span>
+      </button>
+    </div>
+    <input type="file" id="file-import" accept=".json" style="display:none" />
+  </section>
+
+  <!-- ═══ Step Edit Modal ═══ -->
+  <div class="modal-overlay" id="step-modal" style="display:none;">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modal-title" data-i18n="editStep">Step bearbeiten</h3>
+        <button class="btn-icon" id="modal-close" data-i18n-title="close" title="Schließen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <input type="hidden" id="edit-step-index" value="-1" />
+
+        <div class="input-group">
+          <label class="label" for="edit-selector" data-i18n="cssSelector">CSS-Selektor</label>
+          <div class="input-with-btn">
+            <input type="text" id="edit-selector" class="input input--mono" placeholder="#my-element" />
+            <button class="btn-icon btn-icon--inline" id="edit-pick-element" data-i18n-title="repickTitle" title="Element neu auswählen">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
+            </button>
+          </div>
+          <span class="input-hint" id="edit-selector-status"></span>
+        </div>
+
+        <div class="input-group">
+          <label class="label" for="edit-title" data-i18n="title">Titel</label>
+          <input type="text" id="edit-title" class="input" data-i18n="titlePlaceholder" data-i18n-target="placeholder" placeholder="Willkommen!" />
+        </div>
+
+        <div class="input-group">
+          <label class="label" for="edit-description" data-i18n="description">Beschreibung</label>
+          <textarea id="edit-description" class="input textarea" rows="3" data-i18n="descriptionPlaceholder" data-i18n-target="placeholder" placeholder="Erkläre diesen Bereich..."></textarea>
+          <span class="input-hint" data-i18n="htmlSupported">HTML wird unterstützt</span>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label class="label" for="edit-side" data-i18n="position">Position</label>
+            <select id="edit-side" class="select">
+              <option value="" data-i18n="auto">Auto</option>
+              <option value="top" data-i18n="top">Oben</option>
+              <option value="right" data-i18n="right">Rechts</option>
+              <option value="bottom" data-i18n="bottom">Unten</option>
+              <option value="left" data-i18n="left">Links</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="label" for="edit-align" data-i18n="alignment">Ausrichtung</label>
+            <select id="edit-align" class="select">
+              <option value="" data-i18n="auto">Auto</option>
+              <option value="start" data-i18n="start">Start</option>
+              <option value="center" data-i18n="center">Mitte</option>
+              <option value="end" data-i18n="end">Ende</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="label" data-i18n="visibleButtons">Sichtbare Buttons</label>
+          <div class="checkbox-group">
+            <label class="checkbox"><input type="checkbox" id="edit-btn-next" checked /><span data-i18n="next">Weiter</span></label>
+            <label class="checkbox"><input type="checkbox" id="edit-btn-prev" checked /><span data-i18n="previous">Zurück</span></label>
+            <label class="checkbox"><input type="checkbox" id="edit-btn-close" checked /><span data-i18n="close">Schließen</span></label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label class="label" data-i18n="disableInteraction">Interaktion deaktivieren</label>
+          <label class="toggle"><input type="checkbox" id="edit-disable-interaction" /><span class="toggle__slider"></span></label>
+        </div>
+
+        <div class="input-group">
+          <label class="label" for="edit-custom-class" data-i18n="customCssClass">Custom CSS-Klasse</label>
+          <input type="text" id="edit-custom-class" class="input input--sm" placeholder="my-custom-popover" />
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" id="modal-cancel" data-i18n="cancel">Abbrechen</button>
+        <button class="btn btn--primary" id="modal-save" data-i18n="save">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Toast ═══ -->
+  <div class="toast" id="toast" style="display:none;">
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

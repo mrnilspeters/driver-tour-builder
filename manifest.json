@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Driver.js Tour Builder",
+  "version": "1.0.0",
+  "description": "Visueller Tour-Builder für driver.js — Elemente per Klick auswählen, Steps konfigurieren, als JSON exportieren und Live-Vorschau starten.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "sidePanel",
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Tour Builder öffnen"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/driver.js.iife.js",
+        "lib/driver.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

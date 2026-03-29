@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version from manifest
+        id: version
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building version $VERSION"
+
+      - name: Create distribution zip
+        run: |
+          mkdir -p dist
+          zip -r "dist/driver-tour-builder-v${{ steps.version.outputs.version }}.zip" \
+            manifest.json \
+            background/ \
+            content/ \
+            sidepanel/ \
+            lib/ \
+            icons/ \
+            LICENSE \
+            -x "*.map" "*.ts"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "v${{ steps.version.outputs.version }}"
+          body: |
+            ## Driver.js Tour Builder v${{ steps.version.outputs.version }}
+
+            ### Installation
+
+            1. Download `driver-tour-builder-v${{ steps.version.outputs.version }}.zip` below
+            2. Unzip to a permanent folder
+            3. Open `chrome://extensions/` in Chrome
+            4. Enable **Developer Mode** (top-right toggle)
+            5. Click **"Load unpacked"** and select the unzipped folder
+
+            See [CHANGELOG.md](CHANGELOG.md) for details.
+          files: dist/driver-tour-builder-v${{ steps.version.outputs.version }}.zip
+          draft: false
+          prerelease: false
